@@ -18,7 +18,7 @@ fs = fluidsynth.Synth(gain=1)
 fs.start(driver="coreaudio")
 sfid = fs.sfload("VisionChords/Assets/soundfont.sf2")
 
-fs.program_select(0, sfid, 0, 0)
+fs.program_select(0, sfid, 0, 48)
 fs.cc(0, 7, 127)  # Channel volume to max
 current_chord = 0
 
@@ -81,7 +81,7 @@ while True:
         stable_frames += 1
     else:
         last_count, stable_frames = count, 0
-        
+
     if stable_frames == 3:
         current_chord = chords.set_chord(fs, count)
 
@@ -90,5 +90,6 @@ while True:
     if cv2.waitKey(1) == ord('q'):
         break
 
+fs.delete()
 cap.release()
 cv2.destroyAllWindows()

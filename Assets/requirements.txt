@@ -1,3 +1,8 @@
+Python libraries:
 mediapipe==1.2.2
 numpy==2.4.1
 opencv-python==5.0.0.93
+
+
+Required assets:
+soundfont: https://www.schristiancollins.com/generaluser

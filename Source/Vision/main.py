@@ -10,7 +10,7 @@ from mediapipe.tasks.python.vision import HandLandmarksConnections
 HAND_CONNECTIONS = HandLandmarksConnections.HAND_CONNECTIONS
 
 # Set up the hand landmarker
-base_options = python.BaseOptions(model_asset_path="VisionChords/hand_landmarker.task")
+base_options = python.BaseOptions(model_asset_path="VisionChords/Assets/hand_landmarker.task")
 options = vision.HandLandmarkerOptions(
     base_options=base_options,
     running_mode=vision.RunningMode.VIDEO,

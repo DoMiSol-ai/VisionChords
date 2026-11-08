@@ -5,7 +5,10 @@ CHORDS = {
     2: [55, 59, 62],   # G major
     3: [57, 60, 64],   # A minor
     4: [53, 57, 60],   # F major
+    5: [60, 65, 68],   # C major
+
 }
+
 CHORD_NAMES = {1: "C", 2: "G", 3: "Am", 4: "F"}
 
 current_chord = 0
@@ -26,5 +29,4 @@ def set_chord(fs, n):
 
     current_chord = n
 
-    print("hello world")
     return n

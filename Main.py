@@ -4,6 +4,11 @@ import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
+# Hand connection drawing utility
+from mediapipe.tasks.python.vision import HandLandmarksConnections
+
+HAND_CONNECTIONS = HandLandmarksConnections.HAND_CONNECTIONS
+
 # Set up the hand landmarker
 base_options = python.BaseOptions(model_asset_path="VisionChords/hand_landmarker.task")
 options = vision.HandLandmarkerOptions(
@@ -32,12 +37,18 @@ while True:
 
     h, w, _ = frame.shape
     for hand_landmarks in result.hand_landmarks:
-        for lm in hand_landmarks:
-            # Landmark coords are normalized (0-1), so scale to pixels
-            cx, cy = int(lm.x * w), int(lm.y * h)
-            cv2.circle(frame, (cx, cy), 4, (0, 255, 0), -1)
+        # Convert all landmarks to pixel coordinates once
+        points = [(int(lm.x * w), int(lm.y * h)) for lm in hand_landmarks]
 
-    cv2.imshow("Video", frame)
+        # Draw the lines first
+        for connection in HAND_CONNECTIONS:
+            cv2.line(frame, points[connection.start], points[connection.end], (255, 255, 255), 2)
+
+        # Then draw the points on top
+        for p in points:
+            cv2.circle(frame, p, 4, (0, 255, 0), -1)
+
+    cv2.imshow("Vision chords", frame)
 
     if cv2.waitKey(1) == ord('q'):
         break
